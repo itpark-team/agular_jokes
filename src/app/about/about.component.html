@@ -1,0 +1,17 @@
+<p>about works!</p>
+<ul>
+  <li *ngFor="let about of abouts; let i=index">{{i}}|{{about}}</li>
+</ul>
+<div>
+  <input type="text" [ngModel]="tempAbout" (ngModelChange)="tempAbout=$event">
+  <p>value: {{tempAbout}}</p>
+  <button (click)="addInformationAboutUs()">Add Information</button>
+</div>
+<div>
+  <input type="number" [ngModel]="tempAbout" (ngModelChange)="tempAbout=$event">
+  <p>value: {{tempIndexAbout}}</p>
+  <button (click)="deleteInformationAboutUs()">Delete Information</button>
+</div>
+<div>
+  <button (click)="updateInformationAboutUs()">Update Information</button>
+</div>

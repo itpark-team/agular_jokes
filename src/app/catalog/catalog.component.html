@@ -1,0 +1,17 @@
+<p>catalog works!</p>
+<ul>
+  <li *ngFor="let product of products; let i=index">{{i}}|{{product}}</li>
+</ul>
+<div>
+  <input type="text" [ngModel]="tempProduct" (ngModelChange)="tempProduct=$event">
+  <p>value: {{tempProduct}}</p>
+  <button (click)="addProduct()">Add Product</button>
+</div>
+<div>
+  <input type="number" [ngModel]="tempIndex" (ngModelChange)="tempIndex=$event">
+  <p>value: {{tempIndex}}</p>
+  <button (click)="deleteProduct()">Delete Product</button>
+</div>
+<div>
+  <button (click)="updateProduct()">Update Product</button>
+</div>
