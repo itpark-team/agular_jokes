@@ -13,7 +13,7 @@ import {CatalogComponent} from './catalog/catalog.component';
 import {FormsModule} from '@angular/forms';
 import {DataService} from './services/data.service';
 import {JokesComponent} from './jokes/jokes.component';
-import {JokesModelComponent} from './jokes/jokes-model.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,7 +35,8 @@ const appRoutes: Routes = [
     NgbModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

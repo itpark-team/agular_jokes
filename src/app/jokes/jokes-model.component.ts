@@ -1,13 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {JokesComponent} from './jokes.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DataService} from '../services/data.service';
-import {stringify} from 'querystring';
-
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 
 interface Joke {
   id: number;
@@ -24,13 +20,22 @@ export class JokesModelComponent {
 
   token: string;
 
-  jokeInputsGroup = new FormGroup({
+  /*jokeInputsGroup = new FormGroup({
     textInput: new FormControl(''),
     rating: new FormControl(0)
-  });
+  });*/
 
-  constructor(public activeModal: NgbActiveModal, private router: Router, private http: HttpClient, private dataService: DataService) {
+  jokeInputsGroup: FormGroup;
+
+  constructor(public activeModal: NgbActiveModal, private router: Router, private http: HttpClient, private dataService: DataService, private fb: FormBuilder) {
     this.token = dataService.getData('AccessToken');
+  }
+
+  ngOnInit() {
+    this.jokeInputsGroup = this.fb.group({
+      textInput: ['', Validators.required],
+      rating: [0, Validators.required]
+    });
   }
 
   addModel(): void {
@@ -43,6 +48,11 @@ export class JokesModelComponent {
       data => { // this.jokesList.push(data)
       });*/
   }
+
+  fakeMethod(): void {
+    console.log(111);
+  }
+
 
 }
 
