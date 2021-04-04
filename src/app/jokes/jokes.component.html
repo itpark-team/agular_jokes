@@ -12,6 +12,7 @@
     <td>{{joke.text}}</td>
     <td>{{joke.rating}}</td>
     <button type="button" class="btn btn-danger"(click)="deleteJoke(joke.id)" >DeleteJoke</button>
+    <button type="submit" class="btn btn-warning" (click)="updateJoke()">Update Joke</button>
   </tr>
   </tbody>
 </table>
@@ -30,6 +31,6 @@
     <input [ngModel]="tempJoke.rating" type="number" (ngModelChange)="tempJoke.rating=$event" class="form-control" placeholder="Rating">
   </div>
 
-  <button type="submit" class="w-25 btn btn-primary btn-lg mb-5 mt-3 mx-sm-3" (click)="addJoke()">Add Joke</button>
-  <button type="submit" class="w-25 btn btn-primary btn-lg mb-5 mx-sm-2 mt-3" (click)="updateJoke()">Update Joke</button>
+  <button type="submit" class="w-25 btn btn-primary btn-lg mb-5 mt-3 mx-sm-3" (click)="openJokes()">Add Joke</button>
+
 </form>

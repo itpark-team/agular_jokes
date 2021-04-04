@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DataService} from '../services/data.service';
 import {stringify} from 'querystring';
+import {JokesModel} from './jokes-model';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 interface Joke {
   id: number;
@@ -20,8 +22,13 @@ export class JokesComponent implements OnInit {
   tempJoke: Joke = {id: 0, rating: 0, text: ''};
   token: string;
 
-  constructor(private http: HttpClient, private dataService: DataService) {
+  constructor(private http: HttpClient, private dataService: DataService, private modalService: NgbModal) {
     this.token = dataService.getData('AccessToken');
+  }
+
+  openJokes(): void {
+    const modalRef = this.modalService.open(JokesModel);
+    modalRef.componentInstance.text = 'Some text';
   }
 
   ngOnInit(): void {
