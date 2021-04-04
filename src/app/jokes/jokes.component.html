@@ -17,10 +17,10 @@
   </tbody>
 </table>
 
-  <button type="button" class="w-25 btn btn-success btn-lg mx-sm-3 mb-2" (click)="loadJokes()" >LoadJokes</button>
+<button type="button" class="w-25 btn btn-success btn-lg mx-sm-3 mb-2" (click)="loadJokes()" >LoadJokes</button>
 
 
-<form class="form-row">
+<!-- <form class="form-row">
   <div class="col-1">
     <input [ngModel]="tempJoke.id" type="number" (ngModelChange)="tempJoke.id=$event" class="form-control" placeholder="Id">
   </div>
@@ -30,7 +30,9 @@
   <div class="col-3">
     <input [ngModel]="tempJoke.rating" type="number" (ngModelChange)="tempJoke.rating=$event" class="form-control" placeholder="Rating">
   </div>
+  </form>
+ -->
 
   <button type="submit" class="w-25 btn btn-primary btn-lg mb-5 mt-3 mx-sm-3" (click)="openJokes()">Add Joke</button>
 
-</form>
+

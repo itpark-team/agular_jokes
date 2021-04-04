@@ -7,6 +7,7 @@ import {DataService} from '../services/data.service';
 import {stringify} from 'querystring';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormControl, FormGroup} from '@angular/forms';
 
 interface Joke {
   id: number;
@@ -16,31 +17,31 @@ interface Joke {
 
 
 @Component({
-  templateUrl: './jokes-model.html'
+  templateUrl: './jokes-model.component.html'
 })
 
-export class JokesModel {
-  @Input() text: string;
-  @Input() rating: number;
-  @Input() token: string;
-  @Input() jokesList: Joke[] = [];
-  @Input() tempJoke: Joke;
+export class JokesModelComponent {
 
+  token: string;
 
-  constructor(public activeModal: NgbActiveModal, private router: Router, private http: HttpClient) {
+  jokeInputsGroup = new FormGroup({
+    textInput: new FormControl(''),
+    rating: new FormControl(0)
+  });
+
+  constructor(public activeModal: NgbActiveModal, private router: Router, private http: HttpClient, private dataService: DataService) {
+    this.token = dataService.getData('AccessToken');
   }
 
   addModel(): void {
-    const body = JSON.stringify(this.tempJoke);
+    alert(this.jokeInputsGroup.value);
+    console.log(this.jokeInputsGroup.value);
+    /*const body = JSON.stringify(this.tempJoke);
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.token);
 
-
     this.http.post<Joke>('https://localhost:44315/api/jokes', body, {headers: myHeaders}).subscribe(
-      data => this.jokesList.push(data));
-  }
-
-  closeModal(): void {
-    this.router.navigateByUrl('/jokes');
+      data => { // this.jokesList.push(data)
+      });*/
   }
 
 }

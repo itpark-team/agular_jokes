@@ -13,6 +13,7 @@ import {CatalogComponent} from './catalog/catalog.component';
 import {FormsModule} from '@angular/forms';
 import {DataService} from './services/data.service';
 import {JokesComponent} from './jokes/jokes.component';
+import {JokesModelComponent} from './jokes/jokes-model.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},

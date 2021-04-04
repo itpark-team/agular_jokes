@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DataService} from '../services/data.service';
 import {stringify} from 'querystring';
-import {JokesModel} from './jokes-model';
+import {JokesModelComponent} from './jokes-model.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 interface Joke {
@@ -27,7 +27,7 @@ export class JokesComponent implements OnInit {
   }
 
   openJokes(): void {
-    const modalRef = this.modalService.open(JokesModel);
+    const modalRef = this.modalService.open(JokesModelComponent);
     modalRef.componentInstance.text = 'Some text';
   }
 
@@ -56,7 +56,6 @@ export class JokesComponent implements OnInit {
   addJoke(): void {
     const body = JSON.stringify(this.tempJoke);
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.token);
-
 
     this.http.post<Joke>('https://localhost:44315/api/jokes', body, {headers: myHeaders}).subscribe(
       data => this.jokesList.push(data)
