@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DataService} from '../services/data.service';
-import {stringify} from 'querystring';
 import {JokesModelComponent} from './jokes-model.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {MatDialog} from '@angular/material/dialog';
 
 interface Joke {
   id: number;
@@ -22,13 +21,18 @@ export class JokesComponent implements OnInit {
   tempJoke: Joke = {id: 0, rating: 0, text: ''};
   token: string;
 
-  constructor(private http: HttpClient, private dataService: DataService, private modalService: NgbModal) {
+  constructor(private http: HttpClient, private dataService: DataService, public dialog: MatDialog) {
     this.token = dataService.getData('AccessToken');
   }
 
   openJokes(): void {
-    const modalRef = this.modalService.open(JokesModelComponent);
-    modalRef.componentInstance.text = 'Some text';
+    const dialogRef = this.dialog.open(JokesModelComponent, {
+      data: {id: 0, text: '', rating: 0}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      alert(result['text']+" "+result['rating']);
+    });
   }
 
   ngOnInit(): void {

@@ -10,10 +10,11 @@ import {HomeComponent} from './home/home.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AboutComponent} from './about/about.component';
 import {CatalogComponent} from './catalog/catalog.component';
-import {FormsModule} from '@angular/forms';
 import {DataService} from './services/data.service';
 import {JokesComponent} from './jokes/jokes.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatLabel} from '@angular/material/form-field';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,8 +36,9 @@ const appRoutes: Routes = [
     NgbModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule,
-    ReactiveFormsModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatLabel
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

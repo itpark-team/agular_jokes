@@ -1,26 +1,19 @@
-<div class="modal-header">
-  <h4 class="modal-title"></h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
+<h1 mat-dialog-title>Add new joke</h1>
+<div mat-dialog-content>
 
-  <form [formGroup]="jokeInputsGroup">
+  <mat-form-field>
+    <mat-label>Text:</mat-label>
+    <input matInput [(ngModel)]="data.text">
+  </mat-form-field>
 
-    <div>
-      <input  type="text" formControlName="textInput" class="form-control" placeholder="Text">
-    </div>
-
-    <div>
-      <input  type="number" formControlName="rating" class="form-control" placeholder="Rating">
-    </div>
-
-  </form>
+  <mat-form-field>
+    <mat-label>Rating:</mat-label>
+    <input matInput [(ngModel)]="data.rating">
+  </mat-form-field>
 
 
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="addModel();activeModal.close('Close click')">Add  </button>
-
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="{text:data.text,rating:data.rating}" cdkFocusInitial>Ok</button>
 </div>
