@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DataService} from '../services/data.service';
-import {stringify} from 'querystring';
+import {AddJokeModalComponent} from './add-joke-modal.component';
+import {MatDialog} from '@angular/material/dialog';
+import {UpdateJokeModalComponent} from './update-joke-modal.component';
 
 interface Joke {
   id: number;
@@ -17,11 +19,30 @@ interface Joke {
 export class JokesComponent implements OnInit {
 
   jokesList: Joke[] = [];
-  tempJoke: Joke = {id: 0, rating: 0, text: ''};
   token: string;
 
-  constructor(private http: HttpClient, private dataService: DataService) {
+  constructor(private http: HttpClient, private dataService: DataService, public dialog: MatDialog) {
     this.token = dataService.getData('AccessToken');
+  }
+
+  showDialogAddJokes(): void {
+    let tempJoke: Joke = {id: 0, rating: 0, text: ''};
+
+    const dialogRef = this.dialog.open(AddJokeModalComponent, {data: tempJoke});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.addJoke(result);
+    });
+  }
+
+  showDialogUpdateJokes(joke: Joke): void {
+    let tempJoke: Joke = {id: joke.id, rating: joke.rating, text: joke.text};
+
+    const dialogRef = this.dialog.open(UpdateJokeModalComponent, {data: tempJoke});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateJoke(result);
+    });
   }
 
   ngOnInit(): void {
@@ -46,10 +67,9 @@ export class JokesComponent implements OnInit {
     );
   }
 
-  addJoke(): void {
-    const body = JSON.stringify(this.tempJoke);
+  addJoke(joke: Joke): void {
+    const body = JSON.stringify(joke);
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.token);
-
 
     this.http.post<Joke>('https://localhost:44315/api/jokes', body, {headers: myHeaders}).subscribe(
       data => this.jokesList.push(data)
@@ -57,9 +77,9 @@ export class JokesComponent implements OnInit {
 
   }
 
-  updateJoke(): void {
-    const body = JSON.stringify(this.tempJoke);
-    const id = this.tempJoke.id;
+  updateJoke(joke: Joke): void {
+    const body = JSON.stringify(joke);
+    const id = joke.id;
 
     const myHeaders = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.token);
 
@@ -70,6 +90,5 @@ export class JokesComponent implements OnInit {
         this.jokesList.splice(findIndex, 1, data);
       }
     );
-
   }
 }

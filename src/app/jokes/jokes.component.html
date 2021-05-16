@@ -4,6 +4,7 @@
     <th>#</th>
     <th>Joke</th>
     <th>Rating</th>
+    <th>Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -11,25 +12,18 @@
     <td>{{joke.id}}</td>
     <td>{{joke.text}}</td>
     <td>{{joke.rating}}</td>
-    <button type="button" class="btn btn-danger"(click)="deleteJoke(joke.id)" >DeleteJoke</button>
+    <td>
+      <div class="mb-2"><button type="button" class="btn btn-danger" (click)="deleteJoke(joke.id)">DeleteJoke</button></div>
+      <div><button type="submit" class="btn btn-warning" (click)="showDialogUpdateJokes(joke)">Update Joke</button></div>
+    </td>
   </tr>
   </tbody>
 </table>
 
-  <button type="button" class="w-25 btn btn-success btn-lg mx-sm-3 mb-2" (click)="loadJokes()" >LoadJokes</button>
+<div class="mb-2">
+  <button type="button" class="w-25 btn btn-success btn-lg mx-sm-3" (click)="loadJokes()">Load Jokes</button>
+</div>
 
-
-<form class="form-row">
-  <div class="col-1">
-    <input [ngModel]="tempJoke.id" type="number" (ngModelChange)="tempJoke.id=$event" class="form-control" placeholder="Id">
-  </div>
-  <div class="col-8">
-    <input [ngModel]="tempJoke.text" type="text" (ngModelChange)="tempJoke.text=$event" class="form-control" placeholder="Joke">
-  </div>
-  <div class="col-3">
-    <input [ngModel]="tempJoke.rating" type="number" (ngModelChange)="tempJoke.rating=$event" class="form-control" placeholder="Rating">
-  </div>
-
-  <button type="submit" class="w-25 btn btn-primary btn-lg mb-5 mt-3 mx-sm-3" (click)="addJoke()">Add Joke</button>
-  <button type="submit" class="w-25 btn btn-primary btn-lg mb-5 mx-sm-2 mt-3" (click)="updateJoke()">Update Joke</button>
-</form>
+<div>
+  <button type="submit" class="w-25 btn btn-primary btn-lg mx-sm-3" (click)="showDialogAddJokes()">Add Joke</button>
+</div>
